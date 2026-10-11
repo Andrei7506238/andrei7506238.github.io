@@ -5,7 +5,6 @@ import { FeaturedProjectsSection } from '../components/sections/FeaturedProjects
 import { Introduction } from '../components/sections/Introduction'
 import { SkillsSection } from '../components/sections/SkillsSection'
 import { EducationSection } from '../components/sections/EducationSection'
-import { TodoSection } from '../components/sections/TodoSection'
 import { BlogSection } from '../components/sections/BlogSection'
 import { person, projects, featuredProjects, skills } from '../data/portfolio'
 
@@ -50,8 +49,6 @@ export function HomePage() {
       <AllProjectsSection projects={allProjects} />
 
       <EducationSection />
-
-      <TodoSection />
 
       <BlogSection />
     </div>

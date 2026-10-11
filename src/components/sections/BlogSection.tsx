@@ -220,9 +220,12 @@ export function BlogSection() {
     }
 
     if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-      const idleId = window.requestIdleCallback(() => {
-        void loadFeed()
-      })
+      const idleId = window.requestIdleCallback(
+        () => {
+          void loadFeed()
+        },
+        { timeout: 1500 },
+      )
 
       return () => {
         controller.abort()
