@@ -7,6 +7,8 @@ import { SplitMediaSection } from '../components/case-study/SplitMediaSection'
 import { MediaFigure } from '../components/case-study/MediaFigure'
 import { MediaCollage } from '../components/case-study/MediaCollage'
 import { CodeBlock } from '../components/case-study/CodeBlock'
+import { Paragraphs } from '../components/case-study/Paragraphs'
+import { imageFolder, withBase } from '../lib/paths'
 import {
   objectives,
   marketGapParagraph,
@@ -32,10 +34,9 @@ import {
 } from '../data/luaRover'
 import './LuaRover.css'
 
-export function LuaRoverPage() {
-  const basePath = import.meta.env.BASE_URL || '/'
-  const asset = (file: string) => `${basePath}images/lua-rover/${file}`
+const asset = imageFolder('lua-rover')
 
+export function LuaRoverPage() {
   return (
     <div className="cs-page lua-rover-page">
       <CaseStudyHero
@@ -43,7 +44,7 @@ export function LuaRoverPage() {
         title="Teaching real Lua by driving a rover"
         lead="LuaRover is an educational app that sits between block based tools and a bare code editor. A student writes actual Lua and every instruction moves a rover on a grid immediately, with the whole project running locally so it works on an old phone or with no internet connection at all."
         ctas={[
-          { label: 'Back to projects', href: `${basePath}#all-projects`, variant: 'ghost' },
+          { label: 'Back to projects', href: withBase('#all-projects'), variant: 'ghost' },
         ]}
         image={{ src: asset('hero-menu.jpg'), alt: 'LuaRover main menu' }}
       />
@@ -77,9 +78,7 @@ export function LuaRoverPage() {
             title={layersBlock.title}
             media={<MediaFigure src={asset(layersBlock.image)} alt={layersBlock.caption} caption={layersBlock.caption} />}
           >
-            {layersBlock.paragraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
+            <Paragraphs items={layersBlock.paragraphs} />
           </SplitMediaSection>
 
           <SplitMediaSection
@@ -87,9 +86,7 @@ export function LuaRoverPage() {
             reverse
             media={<MediaFigure src={asset(panicBlock.image)} alt={panicBlock.caption} caption={panicBlock.caption} />}
           >
-            {panicBlock.paragraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
+            <Paragraphs items={panicBlock.paragraphs} />
           </SplitMediaSection>
 
           <SplitMediaSection
@@ -101,9 +98,7 @@ export function LuaRoverPage() {
               />
             }
           >
-            {trampolineBlock.paragraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
+            <Paragraphs items={trampolineBlock.paragraphs} />
           </SplitMediaSection>
 
           <SplitMediaSection
@@ -111,9 +106,7 @@ export function LuaRoverPage() {
             reverse
             media={<MediaFigure src={asset(codegenBlock.image)} alt={codegenBlock.caption} caption={codegenBlock.caption} />}
           >
-            {codegenBlock.paragraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
+            <Paragraphs items={codegenBlock.paragraphs} />
           </SplitMediaSection>
         </div>
       </Section>
@@ -183,5 +176,3 @@ export function LuaRoverPage() {
     </div>
   )
 }
-
-export default LuaRoverPage

@@ -22,7 +22,7 @@ const skillGroups: SkillGroupDefinition[] = [
     title: 'Familiar technologies',
     description: 'Tools I’m comfortable with when a project requires them but I need a refresher to get up to speed.',
   },
-    {
+  {
     level: 'practices',
     title: 'Engineering practices and methodologies',
     description: 'Development practices I apply across all my projects.',

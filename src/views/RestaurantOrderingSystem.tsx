@@ -6,6 +6,8 @@ import { StatsRow } from '../components/case-study/StatsRow'
 import { SplitMediaSection } from '../components/case-study/SplitMediaSection'
 import { MediaFigure } from '../components/case-study/MediaFigure'
 import { MediaCollage } from '../components/case-study/MediaCollage'
+import { Paragraphs } from '../components/case-study/Paragraphs'
+import { imageFolder, withBase } from '../lib/paths'
 import {
   requirements,
   featureCards,
@@ -16,10 +18,9 @@ import {
   entities,
 } from '../data/restaurantOrderingSystem'
 
-export function RestaurantOrderingSystemPage() {
-  const basePath = import.meta.env.BASE_URL || '/'
-  const asset = (file: string) => `${basePath}images/restaurant-ordering-system/${file}`
+const asset = imageFolder('restaurant-ordering-system')
 
+export function RestaurantOrderingSystemPage() {
   return (
     <div className="cs-page">
       <CaseStudyHero
@@ -27,8 +28,8 @@ export function RestaurantOrderingSystemPage() {
         title="Modular ordering for busy restaurants"
         lead="A plugin-ready platform with a Flutter client and ASP.NET Core backend. Built to keep menus flexible, orders reliable and integrations open."
         ctas={[
-          { label: 'Watch the demo', href: 'https://youtu.be/WKDwvteNCFw', external: true },
-          { label: 'Back to projects', href: `${basePath}#all-projects`, variant: 'ghost' },
+          { label: 'Watch the demo', href: 'https://youtu.be/WKDwvteNCFw' },
+          { label: 'Back to projects', href: withBase('#all-projects'), variant: 'ghost' },
         ]}
       />
 
@@ -83,9 +84,7 @@ export function RestaurantOrderingSystemPage() {
               media={<MediaFigure src={asset(block.image)} alt={block.caption} caption={block.caption} />}
             >
               <h3>{block.title}</h3>
-              {block.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
+              <Paragraphs items={block.paragraphs} />
             </SplitMediaSection>
           ))}
         </div>
@@ -163,5 +162,3 @@ export function RestaurantOrderingSystemPage() {
     </div>
   )
 }
-
-export default RestaurantOrderingSystemPage

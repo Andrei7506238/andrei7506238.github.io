@@ -14,9 +14,7 @@ export function AllProjectsSection({ projects }: Props) {
       <div className="section-header">
         <h2 id="all-projects-title">All Projects</h2>
         <p className="section-subtitle">
-          {hasProjects 
-            ? "A quick overview of the rest of my work." 
-            : "More projects coming soon!"}
+          {hasProjects ? 'A quick overview of the rest of my work.' : 'More projects coming soon!'}
         </p>
       </div>
 

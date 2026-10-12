@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { cx } from '../../lib/classNames'
 import './CaseStudy.css'
 
 type Props = {
@@ -11,10 +12,8 @@ type Props = {
 }
 
 export function Section({ eyebrow, title, lead, muted = false, id, children }: Props) {
-  const classes = ['cs-section', muted ? 'cs-section--muted' : ''].filter(Boolean).join(' ')
-
   return (
-    <section id={id} className={classes}>
+    <section id={id} className={cx('cs-section', muted && 'cs-section--muted')}>
       <div className="cs-section__header">
         {eyebrow ? <p className="cs-eyebrow">{eyebrow}</p> : null}
         <h2>{title}</h2>

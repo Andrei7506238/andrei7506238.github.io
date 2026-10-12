@@ -1,0 +1,78 @@
+---
+import '../styles/global.css'
+import '../styles/layout.css'
+import { NavBar } from '../components/ui/NavBar'
+import { ThemeSwitcher } from '../components/ui/ThemeSwitcher'
+import { Footer } from '../components/sections/Footer'
+import { person } from '../data/portfolio'
+import { withBase } from '../lib/paths'
+
+type Props = {
+  title: string
+  description: string
+  /** Path under public/, e.g. "images/showcase/profile.jpeg". */
+  image?: string
+  ogType?: 'website' | 'article'
+}
+
+const { title, description, image, ogType = 'website' } = Astro.props
+
+// GitHub Pages serves each route as a directory, so canonical URLs end with a slash.
+const canonicalUrl = new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site)
+const imageUrl = image ? new URL(withBase(image), Astro.site) : undefined
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-site-verification" content="A2QNNay4-frAFSgc8VxgawYiwD68NNn3sG3WI_IWgLw" />
+    <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="sitemap" href={withBase('sitemap-index.xml')} />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={person.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    {imageUrl && <meta property="og:image" content={imageUrl} />}
+    <meta name="twitter:card" content={imageUrl ? 'summary_large_image' : 'summary'} />
+
+    <!-- Set the theme before first paint so pre-rendered pages don't flash the wrong one. -->
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme')
+          var theme =
+            stored === 'light' || stored === 'dark'
+              ? stored
+              : window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light'
+          document.documentElement.setAttribute('data-theme', theme)
+        } catch (e) {
+          // No storage access: index.css falls back to prefers-color-scheme.
+        }
+      })()
+    </script>
+    <slot name="head" />
+  </head>
+  <body>
+    <div id="root">
+      <div>
+        <NavBar name={person.name} linkedinUrl={person.links.linkedin}>
+          <ThemeSwitcher client:load />
+        </NavBar>
+
+        <main><slot /></main>
+
+        <Footer client:visible name={person.name} linkedinUrl={person.links.linkedin} githubUrl={person.links.github} />
+      </div>
+    </div>
+  </body>
+</html>

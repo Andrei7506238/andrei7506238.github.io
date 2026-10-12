@@ -1,5 +1,6 @@
 import type { Project } from '../../types/portfolio'
 import { Tag } from './Tag'
+import { ProjectLinks } from './ProjectLinks'
 import './ProjectCard.css'
 
 type Props = {
@@ -14,20 +15,7 @@ export function ProjectCard({ project }: Props) {
           <img src={project.image} alt={`${project.name} screenshot`} loading="lazy" />
         </div>
         <div className="project-media-overlay">
-          <div className="link-row">
-            {project.links.map((link) => (
-              <a
-                key={link.label}
-                className="link"
-                href={link.href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`${link.label} for ${project.name}`}
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
+          <ProjectLinks links={project.links} projectName={project.name} className="link-row" />
         </div>
         <div className="project-content">
           <div className="tag-row">
@@ -40,9 +28,7 @@ export function ProjectCard({ project }: Props) {
       <div className="project-body">
         <h3>{project.name}</h3>
         <p>{project.description.trim()}</p>
-        <div className="project-date">
-          {project.date}
-        </div>
+        <div className="project-date">{project.date}</div>
       </div>
     </article>
   )

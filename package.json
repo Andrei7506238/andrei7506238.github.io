@@ -3,35 +3,29 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://andrei7506238.github.io",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "astro dev",
+    "build": "astro build",
+    "check": "astro check",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
-    "deploy:profile": "gh-pages -d dist -r https://github.com/andrei7506238/andrei7506238.github.io.git -b main"
+    "preview": "astro preview"
   },
   "dependencies": {
+    "@astrojs/react": "7.0.0",
+    "@astrojs/sitemap": "3.7.4",
+    "astro": "7.3.5",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-router-dom": "^6.29.0"
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
+    "@astrojs/check": "0.9.10",
     "@eslint/js": "^9.39.1",
-    "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.1",
-    "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.4.24",
-    "gh-pages": "^6.3.0",
     "globals": "^16.5.0",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.4"
+    "typescript-eslint": "^8.46.4"
   }
 }

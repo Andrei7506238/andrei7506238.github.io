@@ -1,3 +1,4 @@
+import { cx } from '../../lib/classNames'
 import './CaseStudy.css'
 
 type Props = {
@@ -7,16 +8,8 @@ type Props = {
 }
 
 export function BulletList({ items, tone = 'subtle', tight = false }: Props) {
-  const classes = [
-    'cs-bullet-list',
-    tone === 'plain' ? 'cs-bullet-list--plain' : '',
-    tight ? 'cs-bullet-list--tight' : '',
-  ]
-    .filter(Boolean)
-    .join(' ')
-
   return (
-    <div className={classes}>
+    <div className={cx('cs-bullet-list', tone === 'plain' && 'cs-bullet-list--plain', tight && 'cs-bullet-list--tight')}>
       {items.map((item) => (
         <div key={item} className="cs-bullet-item">
           <span className="cs-bullet-item__dot" aria-hidden>

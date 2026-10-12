@@ -1,8 +1,11 @@
-import type { Education as EducationType } from '../../data/education'
-import { education } from '../../data/education'
+import type { Education } from '../../types/portfolio'
 import './EducationSection.css'
 
-export function EducationSection() {
+type Props = {
+  education: Education[]
+}
+
+export function EducationSection({ education }: Props) {
   return (
     <section className="section education" id="education" aria-labelledby="education-title">
       <div className="section-header">
@@ -11,7 +14,7 @@ export function EducationSection() {
       </div>
 
       <div className="education-cards">
-        {education.map((e: EducationType) => (
+        {education.map((e) => (
           <article key={e.id} className="education-card-large">
             <div className="education-card-inner">
               <div className="education-institution">{e.institution}</div>
@@ -24,5 +27,3 @@ export function EducationSection() {
     </section>
   )
 }
-
-export default EducationSection

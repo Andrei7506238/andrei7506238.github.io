@@ -1,5 +1,5 @@
 ﻿import type { FeaturedProject } from '../types/portfolio'
-import { assetBase } from './base'
+import { withBase } from '../lib/paths'
 
 export const featuredProjects: FeaturedProject[] = [
   {
@@ -10,8 +10,8 @@ My Master's dissertation project, an educational app that teaches real Lua synta
 The interesting part is lua_native, a package I built to bind the official Lua 5.5 C engine into Dart through FFI on native platforms and WebAssembly in the browser, including a setjmp/longjmp based guard so a Lua panic can't crash the host app. The Flutter client records every step as a frame so a run can be replayed and scrubbed without re-executing the script, and an ASP.NET Core backend handles accounts and multilingual lesson content.
             `,
     tags: ['Flutter', 'Dart', 'FFI & WebAssembly'],
-    image: `${assetBase}images/showcase/lua-rover.jpg`,
-    links: [{ label: 'See Case Study', href: '#/lua-rover' }],
+    image: withBase('images/showcase/lua-rover.jpg'),
+    links: [{ label: 'See Case Study', href: '/lua-rover/' }],
   },
   {
     name: 'Plugin Restaurant Ordering System',
@@ -21,9 +21,9 @@ My CS Bachelor's thesis project, built with ASP.NET Core and Flutter. The backen
 The Flutter client caches menus and images locally to keep server requests light. The most interesting piece is SQL temporal tables: every menu version is preserved, so an order placed against an older menu always resolves to the right prices and items. A statistics dashboard covers the manager-facing side.
             `,
     tags: ['ASP.NET Core', 'Flutter', 'Clean Architecture'],
-    image: `${assetBase}images/showcase/plugin-restaurant-ordering-system.png`,
+    image: withBase('images/showcase/plugin-restaurant-ordering-system.png'),
     links: [
-      { label: 'See Case Study', href: '#/restaurant-ordering-system' },
+      { label: 'See Case Study', href: '/restaurant-ordering-system/' },
       { label: 'See Demo', href: 'https://www.youtube.com/watch?v=WKDwvteNCFw' },
     ],
   },
@@ -35,7 +35,7 @@ A Flutter app based on an older C++ project. It models the Romanian dictionary a
 The main challenge was loading the full word graph efficiently at startup and keeping lookups fast enough to run as the user types. The app is live on the Google Play Store.
         `,
     tags: ['Flutter', 'Dart', 'C++'],
-    image: `${assetBase}images/showcase/fazan-cheat.png`,
+    image: withBase('images/showcase/fazan-cheat.png'),
     links: [
       { label: 'Check on Google Play', href: 'https://play.google.com/store/apps/details?id=com.andrei7506238.fazan_cheat' },
       { label: 'See C++ Project', href: 'https://github.com/Andrei7506238/Fazan' },
@@ -51,7 +51,7 @@ The app lets students step through simple programs one instruction at a time, wi
 The original is still used in classrooms and I hope the new version makes it easier to pick up, while keeping the core educational idea intact.
             `,
     tags: ['Flutter', 'Dart', 'Formal Language and Interpreters', 'Educational Game'],
-    image: `${assetBase}images/showcase/cangurul-pas-cu-pas.png`,
+    image: withBase('images/showcase/cangurul-pas-cu-pas.png'),
     links: [{ label: 'Open Demo', href: 'https://cangurulpascupas.vercel.app/' }],
   },
 ]

@@ -1,29 +1,14 @@
+import type { Person } from '../../types/portfolio'
 import { ButtonLink } from '../ui/ButtonLink'
 import './Introduction.css'
 
 type Props = {
-  name: string
-  role: string
-  headline: string
-  photoSrc: string
-  photoAlt: string
-  linkedinUrl: string
-  speciality: string
-  company: string
-  companyUrl?: string
+  person: Person
 }
 
-export function Introduction({
-  name,
-  role,
-  headline,
-  photoSrc,
-  photoAlt,
-  linkedinUrl,
-  speciality,
-  company,
-  companyUrl,
-}: Props) {
+export function Introduction({ person }: Props) {
+  const { name, role, headline, photoSrc, photoAlt, speciality, company, companyUrl } = person
+
   return (
     <header className="section intro">
       <div className="intro-text">
@@ -48,9 +33,9 @@ export function Introduction({
           </div>
         ) : null}
 
-        <p className="lead" style={{ whiteSpace: 'pre-line' }}>{headline}</p>
+        <p className="lead" style={{ whiteSpace: 'pre-line' }}>{headline.trim()}</p>
         <div className="cta-row">
-          <ButtonLink href={linkedinUrl} variant="primary">
+          <ButtonLink href={person.links.linkedin} variant="primary">
             LinkedIn
           </ButtonLink>
         </div>

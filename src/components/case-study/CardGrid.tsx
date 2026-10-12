@@ -1,3 +1,4 @@
+import { cx } from '../../lib/classNames'
 import './CaseStudy.css'
 
 type Card = {
@@ -12,10 +13,8 @@ type Props = {
 }
 
 export function CardGrid({ items, layout = 'grid' }: Props) {
-  const classes = ['cs-card-grid', layout === 'list' ? 'cs-card-grid--list' : ''].filter(Boolean).join(' ')
-
   return (
-    <div className={classes}>
+    <div className={cx('cs-card-grid', layout === 'list' && 'cs-card-grid--list')}>
       {items.map((item) => (
         <div key={item.title} className="cs-card-grid__item">
           {item.icon ? <img src={item.icon} alt="" className="cs-card-grid__icon" /> : null}

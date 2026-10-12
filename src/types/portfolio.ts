@@ -1,3 +1,18 @@
+export type Person = {
+  name: string
+  role: string
+  speciality: string
+  company: string
+  companyUrl?: string
+  headline: string
+  photoSrc: string
+  photoAlt: string
+  links: {
+    linkedin: string
+    github: string
+  }
+}
+
 export type SkillLevel = 'most' | 'basic' | 'practices'
 
 export type Skill = {
@@ -10,16 +25,6 @@ export type Skill = {
 export type ProjectLink = {
   label: string
   href: string
-  linkLogoUrl?: string
-}
-
-export type Project = {
-  name: string
-  description: string
-  tags: string[]
-  image: string
-  links: ProjectLink[]
-  date: string
 }
 
 export type FeaturedProject = {
@@ -28,4 +33,15 @@ export type FeaturedProject = {
   tags: string[]
   image: string
   links: ProjectLink[]
+}
+
+export type Project = FeaturedProject & {
+  date: string
+}
+
+export type Education = {
+  id: string
+  institution: string
+  degree: string
+  period: string
 }

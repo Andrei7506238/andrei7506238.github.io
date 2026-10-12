@@ -1,5 +1,6 @@
 import type { FeaturedProject } from '../../types/portfolio'
 import { Tag } from './Tag'
+import { ProjectLinks } from './ProjectLinks'
 import './FeaturedProjectCard.css'
 
 type Props = {
@@ -19,19 +20,7 @@ export function FeaturedProjectCard({ project }: Props) {
             <Tag key={tag} label={tag} />
           ))}
         </div>
-        <div className="featured-link-row">
-          {project.links.map((link) => (
-            <a
-              key={link.label}
-              className="link"
-              href={link.href}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
+        <ProjectLinks links={project.links} projectName={project.name} className="featured-link-row" />
       </div>
       <div className="featured-project-body">
         <p>{project.description.trim()}</p>

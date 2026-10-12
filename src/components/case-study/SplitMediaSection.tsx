@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { cx } from '../../lib/classNames'
 import './CaseStudy.css'
 
 type Props = {
@@ -18,14 +19,12 @@ export function SplitMediaSection({
   media,
   children,
 }: Props) {
-  const rootClasses = [
+  const rootClasses = cx(
     'cs-media-section',
     variant === 'card' ? 'cs-card' : 'cs-media-section--plain',
     layout === 'stack' ? 'cs-media-section--stack' : 'cs-media-section--split',
-    reverse ? 'cs-media-section--reverse' : '',
-  ]
-    .filter(Boolean)
-    .join(' ')
+    reverse && 'cs-media-section--reverse',
+  )
 
   return (
     <div className={rootClasses}>
