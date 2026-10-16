@@ -5,11 +5,11 @@ export function withBase(path = ''): string {
   return `${basePath.replace(/\/?$/, '/')}${path.replace(/^\//, '')}`
 }
 
-/** URL builder for one image folder under public/images/. */
-export function imageFolder(folder: string) {
-  return (file: string) => withBase(`images/${folder}/${file}`)
-}
-
 export function isExternalUrl(href: string): boolean {
   return /^https?:\/\//.test(href)
+}
+
+/** A file under public/ ("images/x.png") resolved against the deploy base; full URLs pass through. */
+export function assetUrl(src: string): string {
+  return isExternalUrl(src) ? src : withBase(src)
 }

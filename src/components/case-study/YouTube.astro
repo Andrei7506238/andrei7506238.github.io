@@ -1,0 +1,19 @@
+---
+import './CaseStudy.css'
+
+type Props = {
+  /** The video id from a youtu.be/<id> link. */
+  id: string
+  title: string
+}
+
+const { id, title } = Astro.props
+---
+
+<div class="cs-video-frame">
+  <iframe
+    src={`https://www.youtube.com/embed/${id}`}
+    title={title}
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+    allowfullscreen></iframe>
+</div>

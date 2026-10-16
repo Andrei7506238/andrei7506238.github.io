@@ -1,4 +1,5 @@
 import type { CaseStudyImage } from './types'
+import { assetUrl } from '../../lib/paths'
 import './CaseStudy.css'
 
 type Props = CaseStudyImage & {
@@ -10,15 +11,17 @@ type Props = CaseStudyImage & {
  * in place; without JavaScript the link still opens the image on its own.
  */
 export function ZoomableImage({ src, alt, caption, className }: Props) {
+  const url = assetUrl(src)
+
   return (
     <a
       className="cs-zoom"
-      href={src}
+      href={url}
       data-lightbox
       data-caption={caption}
       aria-label={`Enlarge image: ${alt}`}
     >
-      <img className={className} src={src} alt={alt} loading="lazy" />
+      <img className={className} src={url} alt={alt} loading="lazy" />
     </a>
   )
 }

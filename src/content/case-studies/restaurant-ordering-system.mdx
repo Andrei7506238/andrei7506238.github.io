@@ -1,0 +1,126 @@
+---
+title: Restaurant Ordering System case study | Andrei-Robert Popa
+description: Case study of a plugin-ready restaurant ordering platform with a Flutter client and an ASP.NET Core backend built on Clean Architecture and SQL temporal tables.
+image: images/showcase/plugin-restaurant-ordering-system.png
+hero:
+  eyebrow: Restaurant Ordering System
+  title: Modular ordering for busy restaurants
+  lead: A plugin-ready platform with a Flutter client and ASP.NET Core backend. Built to keep menus flexible, orders reliable and integrations open.
+  ctas:
+    - label: Watch the demo
+      href: https://youtu.be/WKDwvteNCFw
+---
+
+- Streamline menu organization and ordering in a dynamic system.
+- Keep the architecture modular so plugins can extend the core without friction.
+- Deliver a modern, cross-platform client with a friendly, customizable UI.
+- Stay adaptable for different restaurant flows and venues.
+
+## See the flow in action
+
+Orders, menu edits and plugin-driven options remain responsive with offline-friendly caching and real-time updates.
+
+<YouTube id="WKDwvteNCFw" title="Restaurant Ordering System demo" />
+
+## Built for flexibility
+
+Runtime plugins, multi-platform delivery and operational tooling keep the system adaptable.
+
+- **Plugin system**: load extensions at runtime to add capabilities without redeploying the server. Contracts keep plugins interoperable.
+- **Cross-platform client**: the Flutter client ships to Android, iOS and web for a consistent guest and staff experience everywhere.
+- **Menu and order management**: versioned menus, multi-section products and live order editing keep staff productive during service.
+
+## Resilient during rush hours
+
+Caching, self-hosting and guardrails keep service smooth when the restaurant is busiest.
+
+- Client caching for historic menu versions.
+- Built-in image management and caching.
+- Self-hosted by design, no internet required.
+- Clean architecture and interface-driven contracts.
+- Customizable orders page and dashboards.
+- Statistics and insights for managers.
+- Extensible authentication and permissions.
+- Entity structure validated by Glovo.
+
+## Clean boundaries, shared contracts
+
+Server and client mirror the same modular principles for easier evolution.
+
+### ASP.NET Core server
+
+Controllers, services and repositories are clearly separated and wired through interfaces.
+
+Domain hosts contracts for repositories, services, entities, events and transactions. Plugins depend only on these interfaces.
+
+Implementation covers persistence, controllers, authentication, real-time comms and notifications.
+
+TestImplementation keeps unit coverage focused. Main hosts plugin loading and startup.
+
+![Server package diagram](/images/restaurant-ordering-system/rosPackageDiagram.png "Server package diagram")
+
+### Flutter client
+
+Domain defines entities, repositories and messaging contracts in pure Dart.
+
+Implementation contains generated OpenAPI clients plus concrete repos and services.
+
+UI hosts all Flutter widgets, dependency injection framework glue and blocks that connect UI to logic.
+
+Server-driven UI components - simply implement the required interfaces in plugins and the UI will adapt.
+
+Clean architecture with clear boundaries keeps the client adaptable and maintainable as features evolve.
+
+State management driven by Cubit/BLoC pattern for predictable, testable UI behavior.
+
+![Client package diagram](/images/restaurant-ordering-system/rosPackageClient.png "Client package diagram")
+
+<Stats>
+
+- **340+** Files with code
+- **340,000+** Lines of code
+- **100+** Unit tests
+
+</Stats>
+
+## Interlocking building blocks
+
+Each layer stays small and swappable, keeping plugins first-class citizens.
+
+- **Controllers**: HTTP endpoints lean on a generic controller pattern for reuse and consistency.
+- **AuthService**: handles authentication and authorization, keeping data safe across roles.
+- **Transaction factory**: a database transaction wrapper ensures consistency with a clean abstraction.
+- **Mapper**: generic mappers convert between entities and DTOs, reusing definitions across modules.
+- **Event observers**: before/after hooks that validators and notifiers implement; plugins can add new observers.
+- **Persisters**: generic CRUD services that abstract data access for controllers and other services.
+- **Repositories**: an EF Core-based data layer responsible for querying and persistence.
+
+![Server communication diagram](/images/restaurant-ordering-system/rosComponents.png "Request flow through the server")
+![Mappers class diagram](/images/restaurant-ordering-system/rosMappers.png "Mappers")
+![Events class diagram](/images/restaurant-ordering-system/rosEvents.png "Event observers")
+![Persister class diagram](/images/restaurant-ordering-system/rosPersister.png "Persisters")
+
+## Runtime extensions without redeploys
+
+DLL-based plugins register services through a simple injector contract so new capabilities ship independently.
+
+### Loading plugins
+
+The server scans a plugin directory, loads DLLs via Assembly and instantiates classes implementing an *IInjector* interface. Plugins receive the IServiceCollection, registering their own services: mappers, persisters, controllers, event observers and more.
+
+Client-side, modules expose options rendered in the UI; triggering an option calls the server to execute the linked action. That keeps integrations discoverable without bloating the core.
+
+![Dynamic options provided by plugins](/images/restaurant-ordering-system/rosActions.png "Dynamic client options injected by server plugins")
+
+## Modeled for restaurant realities
+
+Menu, rooms and orders match how teams operate while staying integration-friendly.
+
+### Entities
+
+- **Menu primitives**: sections, products, attribute groups and attributes mirror delivery-app schemas for smooth integrations.
+- **Dining topology**: location groups and locations model rooms and tables to match on-the-floor operations.
+- **Orders**: active orders keep item status flags; finished orders preserve history including cancellations.
+- **Temporal tables**: menu entities use temporal tables so any past state can be queried precisely.
+
+![Database ER diagram](/images/restaurant-ordering-system/rosDatabase.png "ER diagram for the database")

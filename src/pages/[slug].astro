@@ -1,0 +1,29 @@
+---
+import { getCollection, render } from 'astro:content'
+import CaseStudyLayout from '../layouts/CaseStudyLayout.astro'
+import { CaseStudyHero } from '../components/case-study/CaseStudyHero'
+import { caseStudyWidgets } from '../components/case-study/widgets'
+import { assetUrl, withBase } from '../lib/paths'
+
+export async function getStaticPaths() {
+  const entries = await getCollection('caseStudies')
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }))
+}
+
+const { entry } = Astro.props
+const { title, description, image, hero } = entry.data
+const { Content } = await render(entry)
+---
+
+<CaseStudyLayout title={title} description={description} image={image}>
+  <div class={`cs-page ${entry.id}-page`}>
+    <CaseStudyHero
+      eyebrow={hero.eyebrow}
+      title={hero.title}
+      lead={hero.lead}
+      ctas={[...hero.ctas, { label: 'Back to projects', href: withBase('#all-projects'), variant: 'ghost' }]}
+      image={hero.image && { src: assetUrl(hero.image.src), alt: hero.image.alt }}
+    />
+    <Content components={caseStudyWidgets} />
+  </div>
+</CaseStudyLayout>
