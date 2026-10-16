@@ -5,7 +5,8 @@ import { CardGrid } from '../components/case-study/CardGrid'
 import { StatsRow } from '../components/case-study/StatsRow'
 import { SplitMediaSection } from '../components/case-study/SplitMediaSection'
 import { MediaFigure } from '../components/case-study/MediaFigure'
-import { MediaCollage } from '../components/case-study/MediaCollage'
+import { FigureGrid } from '../components/case-study/FigureGrid'
+import { DeviceGallery } from '../components/case-study/DeviceGallery'
 import { CodeBlock } from '../components/case-study/CodeBlock'
 import { Paragraphs } from '../components/case-study/Paragraphs'
 import { imageFolder, withBase } from '../lib/paths'
@@ -91,10 +92,15 @@ export function LuaRoverPage() {
 
           <SplitMediaSection
             title={trampolineBlock.title}
+            layout="stack"
+            textColumns={2}
             media={
-              <MediaCollage
-                main={{ src: asset(trampolineBlock.registerImage.file), alt: trampolineBlock.registerImage.alt }}
-                rows={[[{ src: asset(trampolineBlock.invokeImage.file), alt: trampolineBlock.invokeImage.alt }]]}
+              <FigureGrid
+                items={[trampolineBlock.registerImage, trampolineBlock.invokeImage].map((image) => ({
+                  src: asset(image.file),
+                  alt: image.alt,
+                  caption: image.alt,
+                }))}
               />
             }
           >
@@ -112,9 +118,9 @@ export function LuaRoverPage() {
       </Section>
 
       <Section title="What a student actually writes">
-        <SplitMediaSection media={<MediaFigure src={asset('a_real_mission_sample.jpg')} alt="LuaRover mission grid with sample tiles" />}>
+        <MediaFigure src={asset('a_real_mission_sample.jpg')} alt="LuaRover mission grid with sample tiles" tone="dark" />
+        <SplitMediaSection matchTextHeight={false} media={<CodeBlock code={missionCode} label="Collect Every Sample" />}>
           <p>{missionIntro}</p>
-          <CodeBlock code={missionCode} label="Collect Every Sample" />
           <p>{missionExplanation}</p>
         </SplitMediaSection>
       </Section>
@@ -130,15 +136,14 @@ export function LuaRoverPage() {
 
           <SplitMediaSection
             title="Cross-platform from one codebase"
-            reverse
+            layout="stack"
+            textColumns={2}
             media={
-              <MediaCollage
-                main={{ src: asset('mobile-menu.jpg'), alt: 'LuaRover mobile menu' }}
-                rows={[
-                  [
-                    { src: asset('mobile-code.jpg'), alt: 'LuaRover mobile code editor' },
-                    { src: asset('mobile-map.jpg'), alt: 'LuaRover mobile grid map' },
-                  ],
+              <DeviceGallery
+                items={[
+                  { src: asset('mobile-menu.jpg'), alt: 'LuaRover mobile debug view with the sensors panel', caption: 'Debug' },
+                  { src: asset('mobile-code.jpg'), alt: 'LuaRover mobile code editor', caption: 'Code' },
+                  { src: asset('mobile-map.jpg'), alt: 'LuaRover mobile grid map', caption: 'Map' },
                 ]}
               />
             }

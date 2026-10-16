@@ -5,7 +5,7 @@ import { CardGrid } from '../components/case-study/CardGrid'
 import { StatsRow } from '../components/case-study/StatsRow'
 import { SplitMediaSection } from '../components/case-study/SplitMediaSection'
 import { MediaFigure } from '../components/case-study/MediaFigure'
-import { MediaCollage } from '../components/case-study/MediaCollage'
+import { FigureGrid } from '../components/case-study/FigureGrid'
 import { Paragraphs } from '../components/case-study/Paragraphs'
 import { imageFolder, withBase } from '../lib/paths'
 import {
@@ -98,24 +98,15 @@ export function RestaurantOrderingSystemPage() {
         lead="Each layer stays small and swappable, keeping plugins first-class citizens."
         muted
       >
-        <SplitMediaSection
-          variant="plain"
-          reverse
-          media={
-            <MediaCollage
-              main={{ src: asset('rosComponents.png'), alt: 'Server communication diagram' }}
-              rows={[
-                [
-                  { src: asset('rosMappers.png'), alt: 'Mappers class diagram' },
-                  { src: asset('rosEvents.png'), alt: 'Events class diagram' },
-                ],
-                [{ src: asset('rosPersister.png'), alt: 'Persister class diagram' }],
-              ]}
-            />
-          }
-        >
-          <CardGrid items={components} layout="list" />
-        </SplitMediaSection>
+        <CardGrid items={components} />
+        <FigureGrid
+          items={[
+            { src: asset('rosComponents.png'), alt: 'Server communication diagram', caption: 'Request flow through the server' },
+            { src: asset('rosMappers.png'), alt: 'Mappers class diagram', caption: 'Mappers' },
+            { src: asset('rosEvents.png'), alt: 'Events class diagram', caption: 'Event observers' },
+            { src: asset('rosPersister.png'), alt: 'Persister class diagram', caption: 'Persisters' },
+          ]}
+        />
       </Section>
 
       <Section
@@ -124,10 +115,10 @@ export function RestaurantOrderingSystemPage() {
         lead="DLL-based plugins register services through a simple injector contract so new capabilities ship independently."
       >
         <SplitMediaSection
-          layout="stack"
           media={
             <MediaFigure
               src={asset('rosActions.png')}
+              tone="dark"
               alt="Dynamic options provided by plugins"
               caption="Dynamic client options injected by server plugins"
             />

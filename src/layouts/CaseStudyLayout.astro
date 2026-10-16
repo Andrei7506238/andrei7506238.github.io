@@ -1,0 +1,18 @@
+---
+import BaseLayout from './BaseLayout.astro'
+import { ImageLightbox } from '../components/case-study/ImageLightbox'
+
+type Props = {
+  title: string
+  description: string
+  /** Path under public/, used as the link preview image. */
+  image: string
+}
+
+const { title, description, image } = Astro.props
+---
+
+<BaseLayout title={title} description={description} image={image} ogType="article">
+  <slot />
+  <ImageLightbox client:idle />
+</BaseLayout>
